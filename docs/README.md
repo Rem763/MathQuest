@@ -1,114 +1,83 @@
-# 数字闯关 — 小学生数学闯关游戏
+# 数字闯关
 
-基于 JavaFX 的丛林探险主题数学闯关游戏，覆盖小学 1~3 年级算术知识点，回合制答题战斗 + 地图选关。
+一款基于 JavaFX 的像素风数学闯关桌面游戏，使用本地 JSON 进行数据配置与存档，包含地图选关、回合战斗、结算和继续游戏等完整流程。
 
-## 玩法概要
+## 项目特点
 
-- **地图选关** — 丛林世界地图，三个年级区域逐步解锁
-- **回合战斗** — 遇怪答题，4选1选择题，答对攻击、答错扣血
-- **技能系统** — 连对攒技能点，释放暴击/回血/必对
-- **道具商店** — 金币购买药水、卷轴、护盾等战斗道具
-- **星级评定** — 根据剩余血量评 1~3 星，3星解锁下一关
+- JavaFX 桌面应用，适合 Windows 环境运行
+- 本地 JSON 存档，轻量、易调试
+- 像素风 UI、`player/idle.png` 与 `slime/idle.png` 等角色素材、战斗背景图
+- 地图选关、普通 / 困难难度切换
+- 回合制答题战斗、倒计时、战斗动画
+- 战斗结算、星级奖励、HP 继承
+- 新游戏 / 继续游戏流程
 
-## 功能范围
+## 主要功能
 
-### 已纳入首版
-- 主菜单：新游戏、继续游戏、设置占位
-- 地图选关：年级切换、关卡解锁、重复挑战、商店入口
-- 战斗系统：答题、技能、道具、逃跑、战斗结束结算
-- 商店系统：道具购买、背包管理
-- 存档系统：自动存档、继续游戏加载
+### 主菜单
+- 新游戏
+- 继续游戏
 
-### 后续版本
-- 音效和背景音乐
-- 角色换装/形象定制
-- 排行榜
-- 成就徽章系统
-- 关卡编辑器
+### 地图系统
+- 世界地图节点展示
+- 关卡选择
+- 普通 / 困难难度切换
+- 年级与关卡推进
+
+### 战斗系统
+- 四选一数学题答题
+- 整数加减乘除题目
+- 普通模式 10 秒倒计时
+- 困难模式 3 秒倒计时
+- 正确 / 错误 / 超时反馈
+- 玩家与怪物像素图动画
+- 逃跑
+- 战斗结束结算
+
+### 结算系统
+- 胜利 / 失败结算
+- 星级与金币奖励
+- 下一关、返回地图、复活
+
+### 存档系统
+- 本地 JSON 自动保存
+- 继续游戏恢复进度
+- 记录玩家 HP、金币、关卡、星级、难度等信息
 
 ## 技术栈
 
-- Java 17+
-- JavaFX — 桌面 GUI（Scene + FXML + CSS）
-- Maven — 构建管理
-- MySQL — 玩家数据存储
-- HikariCP — 数据库连接池
+- Java 17
+- JavaFX 21
+- Maven
+- JSON 本地存档
 
-## 环境要求
+## 运行要求
 
-- JDK 17+
-- MySQL 8.0+
+- JDK 17 或更高版本
 - Maven 3.8+
+- Windows 10/11（推荐）
 
-启动前先创建数据库：
-
-```sql
-CREATE DATABASE number_quest;
-```
-
-然后修改 `src/main/resources/db.properties` 中的数据库连接信息。
-
-## 快速开始
+## 启动方式
 
 ```bash
 mvn javafx:run
 ```
 
-## 项目结构
+## 存档位置
 
-```
-src/main/java/com/quest/
-├── App.java                 # 入口
-├── SceneManager.java        # Scene 切换管理
-├── data/
-│   ├── model/              # Player, Enemy, Level, Item, Question
-│   ├── dao/                # PlayerDao, ItemDao, StarDao
-│   └── DatabaseManager.java  # HikariCP 连接池管理
-├── scene/
-│   ├── TitleScene.java     # 主菜单
-│   ├── MapScene.java       # 地图选关
-│   ├── BattleScene.java    # 回合战斗
-│   ├── ShopScene.java      # 道具商店
-│   └── ResultScene.java    # 战斗结算
-├── logic/
-│   ├── BattleEngine.java   # 战斗回合逻辑
-│   ├── QuestionGenerator.java  # 随机出题
-│   ├── StarCalculator.java # 星级评定
-│   └── ShopService.java    # 购买/背包
-└── config/
-    ├── LevelData.java      # 关卡配置
-    ├── EnemyData.java      # 怪物配置
-    └── ItemData.java       # 道具配置
+程序会在用户目录下生成存档文件：
+
+```text
+.quest-save.json
 ```
 
-## 数据库表
+## 资源说明
 
-| 表 | 说明 |
-|---|------|
-| `player` | 玩家状态（单行，HP/攻击/金币/进度） |
-| `player_items` | 玩家道具背包 |
-| `player_stars` | 关卡星级记录 |
+- `src/main/resources/fxml/`：界面布局
+- `src/main/resources/css/style.css`：像素风样式
+- `src/main/resources/sprites/`：像素角色与背景图（如 `player/idle.png`、`slime/idle.png`）
+- `src/main/resources/data/`：题目、怪物、关卡等数据
 
-## 题目难度分级
+## 当前实现说明
 
-| 怪物难度 | 对应年级 | 范围 |
-|---------|---------|------|
-| 1 | 一年级上 | 10以内加减 |
-| 2 | 一年级下 | 20以内加减 |
-| 3 | 二年级上 | 100以内加减 |
-| 4 | 二年级下 | 乘法口诀 |
-| 5 | 三年级 | 混合运算 |
-
-## 道具列表
-
-| 道具 | 效果 | 价格 |
-|------|------|------|
-| 回复药水 | 恢复 30% HP | 50 |
-| 大回复药水 | 恢复 60% HP | 100 |
-| 攻击卷轴 | 本场攻击 +5 | 80 |
-| 护盾石 | 抵消一次伤害 | 120 |
-| 提示羽毛 | 排除 2 个错误选项 | 30 |
-
-## 设计文档
-
-详见 [docs/设计文档.md](docs/设计文档.md)
+本项目采用“JavaFX + 本地 JSON”的单机架构，不依赖 Spring Boot 或 MySQL。后续如果需要扩展云存档或排行榜，可以再演进为前后端分离架构。
