@@ -1,0 +1,54 @@
+/* Pixel-style retro theme */
+.root {
+    -fx-font-family: "Press Start 2P", "Courier New", monospace;
+    -fx-background-color: linear-gradient(to bottom, #1f2a44, #2d4f6e);
+}
+
+.label {
+    -fx-text-fill: #f8f3d7;
+}
+
+.button {
+    -fx-font-size: 14px;
+    -fx-padding: 10 16 10 16;
+    -fx-background-color: linear-gradient(to bottom, #f7d66b, #c98c1d);
+    -fx-text-fill: #2a1b0f;
+    -fx-font-weight: bold;
+    -fx-border-color: #2a1b0f;
+    -fx-border-width: 3;
+    -fx-background-radius: 0;
+    -fx-border-radius: 0;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.45), 0, 0, 2, 2);
+}
+
+.button:hover {
+    -fx-background-color: linear-gradient(to bottom, #ffe38c, #d8a12a);
+}
+
+.button:pressed {
+    -fx-translate-y: 2;
+}
+
+.vbox, .hbox, .grid-pane, .stack-pane {
+    -fx-background-insets: 0;
+}
+
+.label.pixel-title {
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #fff2b2;
+}
+
+.label.pixel-panel {
+    -fx-background-color: rgba(0, 0, 0, 0.35);
+    -fx-border-color: #f7d66b;
+    -fx-border-width: 2;
+    -fx-padding: 8 12 8 12;
+}
+
+.button.nes-button {
+    -fx-background-color: #f7d66b;
+    -fx-border-color: #2a1b0f;
+    -fx-border-width: 4;
+    -fx-effect: none;
+}

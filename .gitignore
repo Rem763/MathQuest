@@ -1,0 +1,15 @@
+# IDE
+.idea/
+
+# Build output
+out/
+target/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large binaries (root level only)
+/*.png
+/*.zip
+/Free RPG Sprites/

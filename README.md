@@ -1,98 +1,125 @@
-# 数字闯关 — 小学生数学闯关游戏
+# 数字闯关技术说明
 
-基于 JavaFX 的丛林探险主题数学闯关游戏，覆盖小学 1~3 年级算术知识点，回合制答题战斗 + 地图选关。
+**项目名称**：数字闯关（Number Quest）  
+**项目形态**：JavaFX 单机桌面游戏  
+**技术栈**：Java 17、JavaFX 21、Maven、本地 JSON 存档  
+**适用平台**：Windows 10/11
 
-## 玩法概要
+---
 
-- **地图选关** — 丛林世界地图，三个年级区域逐步解锁
-- **回合战斗** — 遇怪答题，4选1选择题，答对攻击、答错扣血
-- **技能系统** — 连对攒技能点，释放暴击/回血/必对
-- **道具商店** — 金币购买药水、卷轴、护盾等战斗道具
-- **星级评定** — 根据剩余血量评 1~3 星，3星解锁下一关
+## 1. 项目概述
 
-## 技术栈
+### 1.1 项目简介
 
-- Java 17+
-- JavaFX — 桌面 GUI（Scene + FXML + CSS）
-- Maven — 构建管理
-- MySQL — 玩家数据存储
-- HikariCP — 数据库连接池
+数字闯关是一款面向小学生的像素风数学闯关游戏。项目将基础算术题与回合制战斗机制结合，玩家通过答题推进关卡，在地图、战斗、结算三个核心场景之间完成完整流程。
 
-## 环境要求
+### 1.2 设计目标
 
-- JDK 17+
-- MySQL 8.0+
+- 以答题驱动闯关，提升学习趣味性
+- 使用 JavaFX 实现轻量、直观的桌面交互
+- 采用本地 JSON 存档，保证离线可用
+- 使用统一资源命名与场景结构，提高维护性
+
+### 1.3 系统特点
+
+- 单机运行，不依赖后端服务
+- 像素风界面与角色动画
+- 地图选关与难度切换
+- 回合制答题战斗
+- 胜负结算
+- 本地 JSON 自动存档
+
+---
+
+## 2. 功能概览
+
+### 2.1 主菜单
+
+- 新游戏
+
+### 2.2 地图系统
+
+- 显示当前关卡与玩家状态
+- 普通 / 困难难度切换
+- 关卡入口与 BOSS 关入口
+- 返回标题页
+
+### 2.3 战斗系统
+
+- 四选一答题
+- 整数加减乘除题目
+- 普通模式 10 秒倒计时
+- 困难模式 3 秒倒计时
+- 正确 / 错误 / 超时反馈
+- 玩家与怪物逐帧动画
+- 逃跑按钮
+- 战斗结束结算
+
+### 2.4 结算系统
+
+- 胜利结算
+- 失败结算
+- 星级与金币奖励
+- 下一关、复活、返回地图
+
+### 2.5 存档系统
+
+- 本地 JSON 自动保存
+- 记录玩家 HP、金币、关卡、星级、难度等信息
+
+---
+
+## 3. 技术栈
+
+- Java 17
+- JavaFX 21
+- Maven
+- JSON 本地存档
+
+---
+
+## 4. 运行要求
+
+- JDK 17 或更高版本
 - Maven 3.8+
+- Windows 10/11
 
-启动前先创建数据库：
+---
 
-```sql
-CREATE DATABASE number_quest;
-```
-
-然后修改 `src/main/resources/db.properties` 中的数据库连接信息。
-
-## 快速开始
+## 5. 启动方式
 
 ```bash
 mvn javafx:run
 ```
 
-## 项目结构
+---
 
-```
-src/main/java/com/quest/
-├── App.java                 # 入口
-├── SceneManager.java        # Scene 切换管理
-├── data/
-│   ├── model/              # Player, Enemy, Level, Item, Question
-│   ├── dao/                # PlayerDao, ItemDao, StarDao
-│   └── DatabaseManager.java  # HikariCP 连接池管理
-├── scene/
-│   ├── TitleScene.java     # 主菜单
-│   ├── MapScene.java       # 地图选关
-│   ├── BattleScene.java    # 回合战斗
-│   ├── ShopScene.java      # 道具商店
-│   └── ResultScene.java    # 战斗结算
-├── logic/
-│   ├── BattleEngine.java   # 战斗回合逻辑
-│   ├── QuestionGenerator.java  # 随机出题
-│   ├── StarCalculator.java # 星级评定
-│   └── ShopService.java    # 购买/背包
-└── config/
-    ├── LevelData.java      # 关卡配置
-    ├── EnemyData.java      # 怪物配置
-    └── ItemData.java       # 道具配置
+## 6. 资源目录说明
+
+- `src/main/resources/fxml/`：界面布局文件
+- `src/main/resources/css/`：样式文件
+- `src/main/resources/sprites/`：角色、怪物与背景素材
+- `src/main/resources/data/`：题目、怪物、关卡配置数据
+
+角色素材采用如下结构：
+
+```text
+src/main/resources/sprites/player/
+src/main/resources/sprites/slime/
 ```
 
-## 数据库表
+---
 
-| 表 | 说明 |
-|---|------|
-| `player` | 玩家状态（单行，HP/攻击/金币/进度） |
-| `player_items` | 玩家道具背包 |
-| `player_stars` | 关卡星级记录 |
+## 7. 存档位置
 
-## 题目难度分级
+程序会在用户目录下生成存档文件：
 
-| 怪物难度 | 对应年级 | 范围 |
-|---------|---------|------|
-| 1 | 一年级上 | 10以内加减 |
-| 2 | 一年级下 | 20以内加减 |
-| 3 | 二年级上 | 100以内加减 |
-| 4 | 二年级下 | 乘法口诀 |
-| 5 | 三年级 | 混合运算 |
+```text
+.quest-save.json
+```
 
-## 道具列表
+---
 
-| 道具 | 效果 | 价格 |
-|------|------|------|
-| 回复药水 | 恢复 30% HP | 50 |
-| 大回复药水 | 恢复 60% HP | 100 |
-| 攻击卷轴 | 本场攻击 +5 | 80 |
-| 护盾石 | 抵消一次伤害 | 120 |
-| 提示羽毛 | 排除 2 个错误选项 | 30 |
+## 8. 当前实现说明
 
-## 设计文档
-
-详见 [docs/superpowers/specs/2026-06-24-number-quest-design.md](docs/superpowers/specs/2026-06-24-number-quest-design.md)
+本项目采用“JavaFX + 本地 JSON”的单机架构，不依赖 Spring Boot 或 MySQL。后续如果需要扩展云存档、排行榜或成就系统，可以在当前架构基础上继续演进。

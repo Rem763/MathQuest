@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
+
+<StackPane fx:id="battleRoot" xmlns:fx="http://javafx.com/fxml" fx:controller="com.quest.scene.BattleController" prefWidth="1280" prefHeight="720">
+    <children>
+        <ImageView fx:id="backgroundImage" fitWidth="1280" fitHeight="720" preserveRatio="false" />
+        <VBox alignment="CENTER" spacing="12" prefWidth="1280" prefHeight="720" style="-fx-background-color: rgba(10, 14, 24, 0.18);" >
+            <children>
+                <Label text="战斗界面" style="-fx-font-size: 34px; -fx-text-fill: #fff2b2; -fx-font-weight: bold; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.8), 4, 0.2, 2, 2);" />
+                <GridPane hgap="40" vgap="8" alignment="CENTER">
+                    <VBox spacing="6" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="0">
+                        <children>
+                            <Label fx:id="playerNameplate" text="玩家" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #ffffff; -fx-background-color: #2f3b55; -fx-border-color: #f7d66b; -fx-border-width: 2; -fx-padding: 4 10 4 10;" />
+                            <StackPane prefWidth="220" prefHeight="220" style="-fx-background-color: rgba(0,0,0,0.28); -fx-border-color: #f7d66b; -fx-border-width: 3; -fx-padding: 8;">
+                                <children>
+                                    <ImageView fx:id="playerSprite" fitWidth="200" fitHeight="200" preserveRatio="true" pickOnBounds="true" />
+                                </children>
+                            </StackPane>
+                            <Label fx:id="hpLabel" text="玩家 HP" style="-fx-text-fill: #ffffff; -fx-background-color: rgba(0,0,0,0.25); -fx-padding: 4 8 4 8;" />
+                        </children>
+                    </VBox>
+                    <VBox spacing="6" alignment="CENTER" GridPane.rowIndex="0" GridPane.columnIndex="1">
+                        <children>
+                            <Label fx:id="monsterNameplate" text="怪物" style="-fx-font-size: 14px; -fx-font-weight: bold; -fx-text-fill: #ffffff; -fx-background-color: #5b2f2f; -fx-border-color: #f7d66b; -fx-border-width: 2; -fx-padding: 4 10 4 10;" />
+                            <StackPane prefWidth="220" prefHeight="220" style="-fx-background-color: rgba(0,0,0,0.28); -fx-border-color: #f7d66b; -fx-border-width: 3; -fx-padding: 8;">
+                                <children>
+                                    <ImageView fx:id="monsterSprite" fitWidth="200" fitHeight="200" preserveRatio="true" pickOnBounds="true" />
+                                </children>
+                            </StackPane>
+                            <Label fx:id="enemyHpLabel" text="怪物 HP" style="-fx-text-fill: #ffffff; -fx-background-color: rgba(0,0,0,0.25); -fx-padding: 4 8 4 8;" />
+                        </children>
+                    </VBox>
+                </GridPane>
+                <Label fx:id="roundLabel" text="回合" style="-fx-font-size: 18px; -fx-text-fill: #ffffff;" />
+                <Label fx:id="coinLabel" text="金币" style="-fx-text-fill: #ffffff;" />
+                <Label fx:id="questionLabel" text="题目" style="-fx-font-size: 26px; -fx-text-fill: #fff2b2; -fx-background-color: rgba(0,0,0,0.30); -fx-border-color: #f7d66b; -fx-border-width: 2; -fx-padding: 8 12 8 12;" />
+                <StackPane prefWidth="540" prefHeight="22">
+                    <children>
+                        <Rectangle fx:id="countdownBar" width="540" height="22" arcWidth="0" arcHeight="0" fill="#e6e6e6" />
+                        <Region fx:id="countdownFill" prefHeight="22" prefWidth="540" style="-fx-background-insets: 0;" />
+                    </children>
+                </StackPane>
+                <Label fx:id="countdownLabel" text="倒计时" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #ffffff;" />
+                <Label fx:id="feedbackLabel" text="请选择答案" style="-fx-font-size: 16px; -fx-text-fill: #f8f3d7; -fx-background-color: rgba(0,0,0,0.35); -fx-border-color: #f7d66b; -fx-border-width: 2; -fx-padding: 8 12 8 12;" />
+                <GridPane hgap="12" vgap="12" alignment="CENTER">
+                    <Button fx:id="option1Button" text="A" onAction="#chooseOption1" GridPane.rowIndex="0" GridPane.columnIndex="0" prefWidth="150" prefHeight="46" />
+                    <Button fx:id="option2Button" text="B" onAction="#chooseOption2" GridPane.rowIndex="0" GridPane.columnIndex="1" prefWidth="150" prefHeight="46" />
+                    <Button fx:id="option3Button" text="C" onAction="#chooseOption3" GridPane.rowIndex="1" GridPane.columnIndex="0" prefWidth="150" prefHeight="46" />
+                    <Button fx:id="option4Button" text="D" onAction="#chooseOption4" GridPane.rowIndex="1" GridPane.columnIndex="1" prefWidth="150" prefHeight="46" />
+                </GridPane>
+                <Button text="逃跑" onAction="#flee" prefWidth="180" prefHeight="44" />
+            </children>
+        </VBox>
+    </children>
+</StackPane>

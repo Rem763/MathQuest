@@ -1,0 +1,8 @@
+[
+  {
+    "name": "史莱姆",
+    "hp": 20,
+    "attack": 3,
+    "image": "images/slime.png"
+  }
+]

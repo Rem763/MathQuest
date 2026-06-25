@@ -1,0 +1,8 @@
+[
+  {
+    "name": "回复药水",
+    "type": "RESTORE",
+    "effect": 30,
+    "price": 50
+  }
+]

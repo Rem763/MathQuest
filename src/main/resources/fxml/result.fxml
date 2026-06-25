@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.TextFlow?>
+
+<VBox xmlns:fx="http://javafx.com/fxml" fx:controller="com.quest.scene.ResultController" alignment="CENTER" spacing="16" prefWidth="1280" prefHeight="720" style="-fx-background-color: linear-gradient(to bottom, #3d285b, #7a4c9a); -fx-padding: 28;">
+    <children>
+        <Label text="结算界面" style="-fx-font-size: 40px; -fx-text-fill: #fff2b2; -fx-font-weight: bold;" />
+        <Label fx:id="resultLabel" text="结果" style="-fx-font-size: 24px; -fx-text-fill: #ffffff; -fx-background-color: rgba(0,0,0,0.25); -fx-border-color: #f7d66b; -fx-border-width: 2; -fx-padding: 10 14 10 14; -fx-background-radius: 12; -fx-border-radius: 12;" wrapText="true" maxWidth="760" />
+
+        <VBox spacing="10" alignment="CENTER" style="-fx-background-color: rgba(0,0,0,0.22); -fx-border-color: #f7d66b; -fx-border-width: 2; -fx-background-radius: 14; -fx-border-radius: 14; -fx-padding: 16;" maxWidth="900">
+            <children>
+                <Label text="最近闯关记录" style="-fx-font-size: 20px; -fx-text-fill: #fff2b2; -fx-font-weight: bold;" />
+                <StackPane prefWidth="860" prefHeight="220" style="-fx-background-color: rgba(255,255,255,0.08); -fx-background-radius: 12; -fx-border-color: rgba(247,214,107,0.5); -fx-border-radius: 12; -fx-padding: 12;">
+                    <children>
+                        <TextFlow fx:id="recordFlow" prefWidth="820" prefHeight="190" style="-fx-font-size: 16px; -fx-text-fill: #ffffff;" />
+                    </children>
+                </StackPane>
+            </children>
+        </VBox>
+
+        <VBox spacing="10" alignment="CENTER">
+            <children>
+                <Button text="下一关" onAction="#nextLevel" prefWidth="200" prefHeight="48" />
+                <Button text="复活" onAction="#revive" prefWidth="200" prefHeight="48" />
+                <Button text="返回地图" onAction="#backToMap" prefWidth="200" prefHeight="48" />
+            </children>
+        </VBox>
+    </children>
+</VBox>
